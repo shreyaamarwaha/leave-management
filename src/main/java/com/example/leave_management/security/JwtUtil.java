@@ -17,10 +17,12 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-    @Value("${app.jwt.secret}")
+    private final String secretKey = "w0wThisIsAS3cr3tJWTKeyValue!!";
+
+    @Value("${jwt.secret}")
     private String secret;
 
-    @Value("${app.jwt.expiration}")
+    @Value("${jwt.expiration}")
     private Long expiration;
 
     private SecretKey getSigningKey() {
@@ -53,8 +55,13 @@ public class JwtUtil {
     }
 
     public String generateToken(UserDetails userDetails) {
-        Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, userDetails.getUsername());
+        return Jwts.builder()
+                .setSubject(userDetails.getUsername())
+                .claim("authorities", userDetails.getAuthorities())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 hours
+                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .compact();
     }
 
     private String createToken(Map<String, Object> claims, String subject) {

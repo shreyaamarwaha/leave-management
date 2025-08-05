@@ -43,7 +43,7 @@ leave-management/
 │   └── service/               # Business logic
 ├── src/main/resources/
 │   └── application.properties  # Application configuration
-├── Dockerfile                 # Docker configuration
+├── Dockerfile                 # Docker configuration || removed currently
 ├── docker-compose.yml         # Docker Compose setup
 └── Leave_Management_API.postman_collection.json
 ```
