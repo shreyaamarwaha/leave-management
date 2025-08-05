@@ -29,4 +29,9 @@ public class AdminController {
             @RequestBody LeaveApprovalDto approvalDto) {
         return ResponseEntity.ok(leaveService.approveOrRejectLeave(leaveId, approvalDto));
     }
+
+    @GetMapping("/leave/upcoming")
+    public ResponseEntity<List<LeaveResponseDto>> getUpcomingLeaves() {
+        return ResponseEntity.ok(leaveService.getAllUpcomingLeaves());
+    }
 } 

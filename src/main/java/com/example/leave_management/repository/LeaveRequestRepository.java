@@ -12,4 +12,6 @@ public interface LeaveRequestRepository extends JpaRepository<LeaveRequest, Long
     List<LeaveRequest> findByEmployee(User employee);
     List<LeaveRequest> findByStatus(LeaveRequest.LeaveStatus status);
     List<LeaveRequest> findByEmployeeAndStatus(User employee, LeaveRequest.LeaveStatus status);
+    // Find all approved leaves with startDate in the future
+    List<LeaveRequest> findByStatusAndStartDateAfter(LeaveRequest.LeaveStatus status, java.time.LocalDate date);
 } 

@@ -1,6 +1,85 @@
-# Leave Management System
+# Leave Management System (Full Stack)
 
-A comprehensive Leave Management System built with Spring Boot, JWT authentication, and PostgreSQL. This project demonstrates JWT-based authentication, role-based access control, and RESTful API design.
+Welcome to your first full stack project! This Leave Management System lets employees apply for leave and admins manage those requests. It’s built with a modern tech stack: **Spring Boot** (Java) for the backend, **React** (with Material-UI) for the frontend, and **PostgreSQL** for the database.
+
+---
+
+## 🌱 What is this project?
+A web app where:
+- **Employees** can log in, apply for leave, and see their leave history.
+- **Admins** can log in, view all leave requests, approve/reject them, and add comments.
+
+You built both the backend (API, database, authentication) and the frontend (UI, user experience) yourself!
+
+---
+
+## 🧠 How it works (in simple terms)
+- **Frontend (React + MUI):**
+  - Users interact with forms and dashboards in their browser.
+  - The UI talks to the backend using HTTP requests (REST API).
+  - Uses Material-UI for a modern, responsive look.
+- **Backend (Spring Boot):**
+  - Handles all the logic: authentication, saving leave requests, user roles, etc.
+  - Uses JWT tokens for secure login.
+  - Talks to the PostgreSQL database to store and retrieve data.
+- **Database (PostgreSQL):**
+  - Stores users, leave requests, and their statuses.
+
+---
+
+## 🗂️ Project Structure (Full Stack)
+```
+leave-management/
+├── leave-management/                # Backend (Spring Boot)
+│   ├── src/main/java/com/example/leave_management/
+│   │   ├── config/        # App config
+│   │   ├── controller/    # API endpoints
+│   │   ├── dto/           # Data transfer objects
+│   │   ├── entity/        # Database models
+│   │   ├── repository/    # Database access
+│   │   ├── security/      # JWT & security
+│   │   └── service/       # Business logic
+│   ├── src/main/resources/
+│   │   └── application.properties
+│   ├── Dockerfile, docker-compose.yml, pom.xml, etc.
+│   └── ...
+├── leave-management-frontend/       # Frontend (React)
+│   ├── src/
+│   │   ├── components/    # Reusable UI (Navbar, Spinner, etc.)
+│   │   ├── context/       # Auth context
+│   │   ├── pages/         # Main pages (AdminDashboard, etc.)
+│   │   ├── services/      # API calls
+│   │   └── ...
+│   ├── public/
+│   ├── package.json, ...
+│   └── ...
+└── ...
+```
+
+---
+
+## 👀 How to revise/understand this project (for your future self)
+- **Start with the README** (this file!) for setup and structure.
+- **Backend:**
+  - Look at `controller/` for API endpoints (what the app can do).
+  - `service/` has the main logic (how things are done).
+  - `entity/` and `repository/` show how data is stored.
+  - `security/` handles login and permissions.
+- **Frontend:**
+  - `pages/` are the main screens (AdminDashboard, Login, etc.).
+  - `components/` are reusable UI pieces.
+  - `services/api.js` is how the frontend talks to the backend.
+- **To run locally:**
+  - Start the backend (Spring Boot) and frontend (React) separately.
+  - Use the default users to log in and test.
+- **To review code:**
+  - Trace a feature end-to-end (e.g., "Apply for leave" → frontend form → API call → backend logic → database).
+  - Use the Postman collection to test APIs directly.
+- **If you get stuck:**
+  - Check the troubleshooting section below.
+  - Google error messages—this is normal!
+
+---
 
 ## 🎯 Features
 
@@ -29,24 +108,79 @@ A comprehensive Leave Management System built with Spring Boot, JWT authenticati
 - ✅ Comprehensive API documentation
 - ✅ Postman collection for testing
 
-## 🏗️ Project Structure
+---
 
+## 🚀 Quick Start
+
+### Prerequisites
+- Java 21
+- Maven 3.6+
+- PostgreSQL 15+
+- Node.js & npm (for frontend)
+- Docker & Docker Compose (optional)
+
+### 1. Clone the repo
+```bash
+cd leave-management
 ```
-leave-management/
-├── src/main/java/com/example/leave_management/
-│   ├── config/                 # Configuration classes
-│   ├── controller/             # REST controllers
-│   ├── dto/                   # Data Transfer Objects
-│   ├── entity/                # JPA entities
-│   ├── repository/            # Data access layer
-│   ├── security/              # JWT security components
-│   └── service/               # Business logic
-├── src/main/resources/
-│   └── application.properties  # Application configuration
-├── Dockerfile                 # Docker configuration || removed currently
-├── docker-compose.yml         # Docker Compose setup
-└── Leave_Management_API.postman_collection.json
+
+### 2. Set up PostgreSQL database
+```sql
+CREATE DATABASE leavemanagement;
+CREATE USER postgres WITH PASSWORD 'root';
+GRANT ALL PRIVILEGES ON DATABASE leavemanagement TO postgres;
 ```
+
+### 3. Start the backend (Spring Boot)
+```bash
+cd leave-management
+./mvnw spring-boot:run
+```
+
+### 4. Start the frontend (React)
+```bash
+cd leave-management-frontend
+npm install
+npm start
+```
+
+### 5. Option: Run everything with Docker
+```bash
+docker-compose up --build
+```
+
+---
+
+## 🔐 Default Users
+
+The application creates default users on startup:
+
+### Admin User
+- **Username:** `admin`
+- **Password:** `admin123`
+- **Role:** ADMIN
+
+### Employee User
+- **Username:** `employee`
+- **Password:** `employee123`
+- **Role:** EMPLOYEE
+
+---
+
+## 📚 API Documentation
+(See below for example requests and endpoints, or use the provided Postman collection.)
+
+---
+
+## 🧪 Testing with Postman
+1. Import the Postman collection (`Leave_Management_API.postman_collection.json`).
+2. Use the default users to log in and get tokens.
+3. Try out the API endpoints for both employee and admin roles.
+
+---
+
+## 📝 More Details
+(Everything below is kept from your original README: API endpoints, configuration, database schema, security, deployment, troubleshooting, license, contributing, and support.)
 
 ## 🚀 Quick Start
 

@@ -55,6 +55,14 @@ public class LeaveService {
                 .collect(Collectors.toList());
     }
 
+    public List<LeaveResponseDto> getAllUpcomingLeaves() {
+        java.time.LocalDate today = java.time.LocalDate.now();
+        return leaveRequestRepository.findByStatusAndStartDateAfter(LeaveRequest.LeaveStatus.APPROVED, today)
+                .stream()
+                .map(this::convertToDto)
+                .collect(java.util.stream.Collectors.toList());
+    }
+
     public LeaveResponseDto approveOrRejectLeave(Long leaveId, LeaveApprovalDto approvalDto) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User admin = userRepository.findByUsername(username)
