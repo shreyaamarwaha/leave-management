@@ -1,3 +1,6 @@
+
+![Uploading image.png…]()
+
 # Leave Management System (Full Stack)
 
 Welcome to your first full stack project! This Leave Management System lets employees apply for leave and admins manage those requests. It’s built with a modern tech stack: **Spring Boot** (Java) for the backend, **React** (with Material-UI) for the frontend, and **PostgreSQL** for the database.
