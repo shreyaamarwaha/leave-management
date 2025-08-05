@@ -13,6 +13,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -38,12 +40,18 @@ public class AuthService {
 
         String token = jwtUtil.generateToken(user);
 
-        return new AuthResponse(
-                token,
-                user.getUsername(),
-                user.getRole().name(),
-                user.getFullName()
-        );
+        return AuthResponse.builder()
+                .token(token)
+                .tokenType("Bearer")
+                .expiresIn(3600L) // 1 hour in seconds
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .fullName(user.getFullName())
+                .role(user.getRole().name())
+                .timestamp(LocalDateTime.now())
+                .message("User registered successfully")
+                .success(true)
+                .build();
     }
 
     public AuthResponse login(AuthRequest request) {
@@ -63,11 +71,17 @@ public class AuthService {
 
         String token = jwtUtil.generateToken(user);
 
-        return new AuthResponse(
-                token,
-                user.getUsername(),
-                user.getRole().name(),
-                user.getFullName()
-        );
+        return AuthResponse.builder()
+                .token(token)
+                .tokenType("Bearer")
+                .expiresIn(3600L) // 1 hour in seconds
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .fullName(user.getFullName())
+                .role(user.getRole().name())
+                .timestamp(LocalDateTime.now())
+                .message("Login successful")
+                .success(true)
+                .build();
     }
 }
